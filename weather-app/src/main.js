@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./header";
 import Weathercard from "./weathercard"
-import "./main.css";
+import "./styles/main.css";
 function main() {
   return (
     <React.Fragment>
