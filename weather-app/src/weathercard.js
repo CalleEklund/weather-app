@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-
+import "./styles/weathercard.css"
 class weathercard extends Component {
     constructor(props) {
       super(props);
       this.state = {
         error: null,
-        isLoaded: false,
+        isLoaded: true,
         items: []
       };
     }
@@ -15,34 +15,46 @@ class weathercard extends Component {
 
 */
 componentDidMount() {
-  fetch("https://api.weatherbit.io/v2.0/current?city=Raleigh,NC&key=63bcd73a709f4efd937739832f624b9c")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.setState({
-          isLoaded: true,
-          items: result.items
-        });
-      },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      (error) => {
-        this.setState({
-          isLoaded: true,
-          error
-        });
-      }
-    )
+    fetch('https://api.weatherbit.io/v2.0/current?city=Raleigh,NC&key=63bcd73a709f4efd937739832f624b9c')
+      .then(response => response.json())
+      .then(data => this.setState({ 
+        isLoaded: false,
+        items: data
+       }));
 }
-
+/**
+ * What the weathercard is supposed to display:
+ * temp: Temperature (default Celcius).
+ * app_temp: Apparent/"Feels Like" temperature (default Celcius).
+ * wind_spd: Wind speed (Default m/s).
+ * pres: Pressure (mb). 
+ * ob_time: Last observation time (YYYY-MM-DD HH:MM).
+ * clouds: Cloud coverage (%).
+ */
 render() {
-  const { error, isLoaded, items } = this.state;
+  const {isLoaded, items } = this.state;
+    if(isLoaded){
+      return (<div>Loading...</div>)
+    }
+    if(!items){
+      return (<div>Did not get any response from API</div>)
+    }
+    console.log(items.data[0]);
+    const weatherpic = "https://www.weatherbit.io/static/img/icons/"+items.data[0].weather.icon+".png";
+    console.log(weatherpic);
   return (
+   
     <React.Fragment>
-    <h1>Test</h1>
-    {console.log(items)}
-    
+    <div className="weather-card">
+      <ol>
+        <li><b>Temp (Feels like):</b> {items.data[0].app_temp}</li>
+        <li><b>Wind speed:</b> {items.data[0].wind_spd}</li>
+        <li>Pressure: {items.data[0].pres}</li>
+        <li>Last Observation time: {items.data[0].ob_time.slice(5)}</li>
+        <li>Cloudiness: {items.data[0].clouds}</li>
+      </ol>
+      <img src={weatherpic} alt="Weather image"/>
+    </div>
     </React.Fragment>
   );
 }
