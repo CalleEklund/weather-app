@@ -1,14 +1,12 @@
 .title {
   font-size: 60px;
-  text-align: center;
   padding-top: 100px;
   padding-bottom: 30px;
   letter-spacing: 5px;
 }
-.searchBar {
+.searchBar{
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
 }
 .searchBar > input {
@@ -18,6 +16,7 @@
   padding-inline-start: 10px;
 }
 .searchBtn {
+  transition: 0.5s;
   width: 40px;
   height: 40px;
   border: 2px solid white;
@@ -25,4 +24,13 @@
   background: url(../search.png) no-repeat;
   background-size: cover;
   cursor: pointer;
+}
+.searchBtn:hover{
+  transition: 0.5s;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(60, 154, 171,0.5);
+}
+.sub-title > select{
+  margin-left: 10px;
 }

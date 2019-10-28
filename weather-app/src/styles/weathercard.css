@@ -1,14 +1,16 @@
 .weather-card{
     border: 1px solid black;
-    margin: auto;
-    width: 25%;
-    margin-top: 5%;
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15vh;
 }
 .weather-card ol{
-    display: inline-block;
+    padding: 8px;
+}
+.weather-card li{
     list-style: none;
+    padding-top: 2vh;
 }
 .weather-card img{
-    display: inline-block;
+    height: 200px;
 }
