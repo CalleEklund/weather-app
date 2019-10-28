@@ -14,12 +14,15 @@ class weathercard extends Component {
 
 */
 componentDidMount() {
-    fetch('https://api.weatherbit.io/v2.0/current?city=Raleigh,NC&key=63bcd73a709f4efd937739832f624b9c')
-      .then(response => response.json())
-      .then(data => this.setState({ 
-        isLoaded: false,
-        items: data
-       }));
+  this.test()
+}
+test(){
+  fetch('https://api.weatherbit.io/v2.0/current?city=Raleigh,NC&key=63bcd73a709f4efd937739832f624b9c')
+  .then(response => response.json())
+  .then(data => this.setState({ 
+    isLoaded: false,
+    items: data
+   }));
 }
 /**
  * What the weathercard is supposed to display:
@@ -30,7 +33,7 @@ componentDidMount() {
  * ob_time: Last observation time (YYYY-MM-DD HH:MM).
  * clouds: Cloud coverage (%).
  */
-render() {
+render() { 
   const {isLoaded, items } = this.state;
     if(isLoaded){
       return (<div>Loading...</div>)
@@ -38,12 +41,12 @@ render() {
     if(!items){
       return (<div>Did not get any response from API</div>)
     }
-    console.log(items.data[0]);
+    //console.log(items.data[0]);
     const weatherpic = "https://www.weatherbit.io/static/img/icons/"+items.data[0].weather.icon+".png";
-    console.log(weatherpic);
+    //console.log(weatherpic);
   return (
-   
     <React.Fragment>
+      
     <div className="weather-card">
       <ol>
         <li>Temp (Feels like): {items.data[0].app_temp}°C</li>
@@ -52,7 +55,8 @@ render() {
         <li>Last Observation time: {items.data[0].ob_time.slice(5)}</li>
         <li>Cloudiness: {items.data[0].clouds}</li>
       </ol>
-      <img src={weatherpic} alt="Weather image"/>
+      <img src={weatherpic} alt="Weather"/>
+      
     </div>
     </React.Fragment>
   );
