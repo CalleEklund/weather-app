@@ -21,6 +21,13 @@ class header extends Component {
     return (
       <React.Fragment>
         <h1 className="title">Weather info</h1>
+        <h4 className="sub-title">Search By 
+        <select>
+          <option>Lat/Lon</option>
+          <option>City Name</option>
+          <option>Postal Code</option>
+        </select>
+        </h4>
         <div className="searchBar">
           <input
             type="text"

@@ -4,7 +4,6 @@ class weathercard extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        error: null,
         isLoaded: true,
         items: []
       };
@@ -47,8 +46,8 @@ render() {
     <React.Fragment>
     <div className="weather-card">
       <ol>
-        <li><b>Temp (Feels like):</b> {items.data[0].app_temp}</li>
-        <li><b>Wind speed:</b> {items.data[0].wind_spd}</li>
+        <li>Temp (Feels like): {items.data[0].app_temp}°C</li>
+        <li>Wind speed: {items.data[0].wind_spd}m/s</li>
         <li>Pressure: {items.data[0].pres}</li>
         <li>Last Observation time: {items.data[0].ob_time.slice(5)}</li>
         <li>Cloudiness: {items.data[0].clouds}</li>

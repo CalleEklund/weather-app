@@ -4,10 +4,10 @@ import Weathercard from "./weathercard"
 import "./styles/main.css";
 function main() {
   return (
-    <React.Fragment>
+    <div className="main-content">
       <Header />
       <Weathercard />
-    </React.Fragment>
+    </div>
   );
 }
 
