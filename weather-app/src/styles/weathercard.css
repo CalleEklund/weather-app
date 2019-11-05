@@ -1,16 +1,23 @@
-.weather-card{
-    border: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    margin-top: 15vh;
+.weather-card {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 30%;
+  margin: 0 auto;
 }
-.weather-card ol{
-    padding: 8px;
+.weather-card ol {
+  padding: 8px;
 }
-.weather-card li{
-    list-style: none;
-    padding-top: 2vh;
+.weather-card li {
+  list-style: none;
+  padding-top: 2vh;
 }
-.weather-card img{
-    height: 200px;
+.weather-card img {
+  height: 200px;
+}
+.error {
+  color: red;
+  font-size: 40px;
+  text-align: center;
 }

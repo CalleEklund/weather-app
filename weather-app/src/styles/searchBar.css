@@ -4,33 +4,39 @@
   padding-bottom: 30px;
   letter-spacing: 5px;
 }
-.searchBar{
+.search-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+}
+.searchBar {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15vh;
 }
 .searchBar > input {
   height: 30px;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin-top: 10px;
   width: 500px;
   padding-inline-start: 10px;
 }
 .searchBtn {
   transition: 0.5s;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border: 2px solid white;
   border-radius: 10px;
   background: url(../search.png) no-repeat;
   background-size: cover;
   cursor: pointer;
 }
-.searchBtn:hover{
+.searchBtn:hover {
   transition: 0.5s;
-  width: 60px;
-  height: 60px;
-  background-color: rgba(60, 154, 171,0.5);
+  width: 45px;
+  height: 45px;
+  background-color: rgba(60, 154, 171, 0.5);
 }
-.sub-title > select{
+.sub-title > select {
   margin-left: 10px;
 }
