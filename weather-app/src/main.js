@@ -1,26 +1,87 @@
-import React, { Component } from 'react';
-import Header from "./header";
-import Weathercard from "./weathercard"
+import React, { Component } from "react";
 import "./styles/main.css";
+import SearchBar from "./searchBar";
+import WeatherCard from "./weathercard";
 
 class Main extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+    this.state = {
+      searchWord: "",
+      querySelect: "",
+      data: {},
+      isLoaded: false,
+      error: false
+    };
+    this.handleSearch = this.handleSearch.bind(this);
   }
-  state = { inputData: [], }
+  handleSearch(searchText, query) {
+    this.setState(
+      {
+        searchWord: searchText,
+        querySelect: query
+      },
+      function getApiData() {
+        let apiurl = "https://api.weatherbit.io/v2.0/current?";
+        if (this.state.querySelect === "Lat,Lon") {
+          const lat = this.state.searchWord.split(",")[0];
+          const lon = this.state.searchWord.split(",")[1];
 
-  handleData = (input) => {
-    this.setState({inputData:input});    
+          apiurl += "lat=" + lat + "&lon=" + lon;
+        } else if (this.state.querySelect === "City Name") {
+          apiurl += "city=" + this.state.searchWord;
+        } else {
+          const post = this.state.searchWord.split(",")[0];
+          const countryCode = this.state.searchWord.split(",")[1];
+          apiurl += "postal_code=" + post + "&country=" + countryCode;
+        }
+        apiurl += "&key=63bcd73a709f4efd937739832f624b9c";
+        fetch(apiurl)
+          .then(res => res.json())
+          .then(
+            result => {
+              this.setState({
+                isLoaded: true,
+                data: result.data
+              });
+            },
+            error => {
+              this.setState({
+                data: [],
+                isLoaded: true,
+                error
+              });
+            }
+          );
+      }
+    );
   }
 
-  render() { 
-    return ( 
-  <div className="main-content">
-    <Header onSelectQuery={this.handleData}/>
-    
-    <Weathercard />
-  </div> );
+  render() {
+    if (this.state.error) {
+      return (
+        <div>
+          <SearchBar handleSearch={this.handleSearch} />
+          <p className="error">Error: {this.state.error.message}</p>
+        </div>
+      );
+    } else {
+      if (Array.isArray(this.state.data)) {
+        return (
+          <div>
+            <SearchBar handleSearch={this.handleSearch} />
+            <WeatherCard data={this.state.data} error={this.state.error} />
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <SearchBar handleSearch={this.handleSearch} />
+          </div>
+        );
+      }
+    }
   }
 }
- 
+
 export default Main;
