@@ -35,7 +35,7 @@ class Main extends Component {
           const countryCode = this.state.searchWord.split(",")[1];
           apiurl += "postal_code=" + post + "&country=" + countryCode;
         }
-        apiurl += "&key=63bcd73a709f4efd937739832f624b9c";
+        apiurl += "&key=APIKEY";
         fetch(apiurl)
           .then(res => res.json())
           .then(
